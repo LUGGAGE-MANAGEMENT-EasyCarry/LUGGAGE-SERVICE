@@ -1,4 +1,4 @@
-package com.example.lugaggesystembackofficeapi
+package com.example.lugaggesystemluggageapi
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

@@ -8,8 +8,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 @SpringBootApplication
 @ConfigurationPropertiesScan
 @EnableDiscoveryClient
-class LugaggeSystemLuggageApiApplication
+class BaggageSystemBaggageApiApplication
 
 fun main(args: Array<String>) {
-	runApplication<LugaggeSystemLuggageApiApplication>(*args)
+	runApplication<BaggageSystemBaggageApiApplication>(*args)
 }

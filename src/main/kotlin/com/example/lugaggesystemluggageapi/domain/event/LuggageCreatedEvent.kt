@@ -1,3 +1,7 @@
 package com.example.lugaggesystemluggageapi.domain.event
 
-data class LuggageCreatedEvent()
+import java.util.UUID
+
+data class LuggageCreatedEvent(
+    val luggageId: UUID,val customerId:UUID
+)

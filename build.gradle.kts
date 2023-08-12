@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
+	kotlin("kapt") version "1.8.22"
 }
 
 group = "com.example"
@@ -30,10 +31,13 @@ dependencies {
 	implementation("org.springframework:spring-jdbc")
 	implementation("org.springframework.kafka:spring-kafka")
 	runtimeOnly("org.postgresql:postgresql")
+	kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
 	runtimeOnly("org.postgresql:r2dbc-postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.kafka:spring-kafka-test")
+	implementation("org.mapstruct:mapstruct:1.5.3.Final")// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client
+	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.4")
 }
 
 tasks.withType<KotlinCompile> {

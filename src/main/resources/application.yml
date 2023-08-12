@@ -1,1 +1,48 @@
+spring:
+  application:
+    name: "luggage-service"
+  kafka:
+    bootstrap-servers: http://localhost:29092
+    consumer:
+       auto-offset-reset: earliest
+       group-id: kafka-consumer
+    producer:
+       key-serializer: org.apache.kafka.common.serialization.StringSerializer
+       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
+  flyway:
+    baselineOnMigrate: true
+
+  jpa:
+    properties:
+      hibernate:
+        connection:
+          driver_class: org.hibernate.dialect.PostgresSQLDialect
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/easyFly
+    username: postgres
+    password: Yaman.1903
+
+db:
+  url  : postgresql://localhost:5432/easyFly
+  user : postgres
+  password : Yaman.1903
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8671/eureka/
+
+luggage-system:
+    notification-api:
+        baseUrl: http://localhost:8084
+        connectTimeout: 5000ms
+        readTimeout: 10000ms
+    customer-api:
+        baseUrl: http://localhost:8081
+        connectTimeout: 5000ms
+        readTimeout: 10000ms
+
+
+server:
+  port: 7074

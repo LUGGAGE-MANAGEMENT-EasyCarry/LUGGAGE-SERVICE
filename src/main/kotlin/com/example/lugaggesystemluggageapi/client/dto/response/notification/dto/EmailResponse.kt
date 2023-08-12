@@ -1,3 +1,3 @@
 package com.example.lugaggesystemluggageapi.client.dto.response.notification.dto
 
-data class EmailResponse()
+data class EmailResponse(val to: String,val subject: String,val  htmlContent: String)

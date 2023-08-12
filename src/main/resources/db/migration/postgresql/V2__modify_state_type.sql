@@ -1,0 +1,2 @@
+ALTER TABLE luggage
+DROP COLUMN stateType
