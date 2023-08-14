@@ -1,13 +1,10 @@
 package com.example.lugaggesystemluggageapi.service
 
-import com.example.lugaggesystemluggageapi.domain.enums.State
 import com.example.lugaggesystemluggageapi.producer.LuggageCreatedEventProducer
 import com.example.lugaggesystemluggageapi.repository.LuggageRepository
 import com.example.lugaggesystemluggageapi.utils.createLuggageRequest
 import com.example.lugaggesystemluggageapi.utils.getLuggage
 import com.example.lugaggesystemluggageapi.utils.getLuggageCreatedEvent
-import com.example.lugaggesystemluggageapi.utils.getluggageResponse
-import com.example.lugaggesystemluggageapi.utils.setLuggageState
 import io.mockk.Runs
 import io.mockk.clearMocks
 import io.mockk.coEvery
@@ -15,14 +12,14 @@ import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.springframework.boot.test.context.SpringBootTest
-import java.util.UUID
+
 
 @SpringBootTest
 class LuggageServiceTest {
@@ -68,9 +65,19 @@ class LuggageServiceTest {
             }
         }
 
+        @Test
+        fun `when luggageService#getLuggages  is null it should throw Exception `() = runBlocking {
+            coEvery {
+                luggageRepository.findAll()
+            } throws RuntimeException()
+            assertThrows<RuntimeException> {
+                luggageService.getLuggages()
+            }
+
+            coVerify { luggageRepository.findAll() }
+        }
         // I have an problem with Kotlin Flow
     }
-
 
 
 }
