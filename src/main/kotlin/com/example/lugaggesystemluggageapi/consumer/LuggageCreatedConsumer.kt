@@ -17,8 +17,7 @@ class LuggageCreatedConsumer(private val customerAPI: CustomerAPI) {
     fun receive(@Payload payload: LuggageCreatedEvent) {
         runBlocking {
             val customer = customerAPI.getCustomerById(
-                payload
-                    .customerId
+              payload.customerId!!
             )
             logger.info("this luggage is belongs to this customer: ${customer.name} ")
 

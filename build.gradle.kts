@@ -20,6 +20,7 @@ repositories {
 }
 
 dependencies {
+	testImplementation("io.mockk:mockk:1.12.4")
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

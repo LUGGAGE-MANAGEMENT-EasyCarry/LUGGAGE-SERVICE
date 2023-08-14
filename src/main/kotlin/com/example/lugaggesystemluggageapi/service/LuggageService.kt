@@ -4,7 +4,9 @@ import com.example.lugaggesystemluggageapi.domain.model.Luggage
 import com.example.lugaggesystemluggageapi.domain.dto.request.LuggageRequest
 import com.example.lugaggesystemluggageapi.domain.dto.request.response.LuggageResponse
 import com.example.lugaggesystemluggageapi.domain.enums.State
+import com.example.lugaggesystemluggageapi.domain.event.LuggageCreatedEvent
 import com.example.lugaggesystemluggageapi.domain.mapper.LuggageResponseMapper
+import com.example.lugaggesystemluggageapi.producer.LuggageCreatedEventProducer
 import com.example.lugaggesystemluggageapi.repository.LuggageRepository
 import kotlinx.coroutines.flow.toList
 import org.mapstruct.factory.Mappers
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Service
 import java.util.UUID
 
 @Service
-class LuggageService(private val luggageRepository: LuggageRepository) {
+class LuggageService(private val luggageRepository: LuggageRepository,private val luggageCreatedEventProducer: LuggageCreatedEventProducer) {
 
     suspend fun getLuggageByCustomerIdAndLuggageIdWithState(customerId: UUID, luggageId: UUID): Luggage {
         return luggageRepository.findLuggageByLuggageIdAndCustomerId(customerId, luggageId)
@@ -25,10 +27,11 @@ class LuggageService(private val luggageRepository: LuggageRepository) {
     }
 
     suspend fun createLuggage(luggage: Luggage): Luggage {
+        luggageCreatedEventProducer.send(LuggageCreatedEvent(luggage.luggageId,null))
         return luggageRepository.save(luggage)
     }
 
-    //state a patch mapping yapma ve saveleme save aynı zamanda update dir
+    //state a patch mapping yapma ve saveleme- save aynı zamanda update dir
     suspend fun updateLuggage(id: UUID, luggageRequest: LuggageRequest): Luggage {
         val existingLuggage = luggageRepository.findById(id)
         if (existingLuggage == null) {
