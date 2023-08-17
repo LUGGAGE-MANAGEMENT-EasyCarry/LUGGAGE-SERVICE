@@ -46,7 +46,6 @@ class LuggageController(private val luggageService: LuggageService, private val 
         val luggage = luggageService.createLuggage(converter.convertDtoToEntity(luggageRequest))
         return converter.convertToDto(luggage)
     }
-
     @PatchMapping("/{id}")
     suspend fun update(@PathVariable id: UUID, @RequestBody luggageRequest: LuggageRequest): LuggageResponse {
         val converter = Mappers.getMapper(LuggageResponseMapper::class.java)

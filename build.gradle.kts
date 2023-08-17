@@ -34,6 +34,8 @@ dependencies {
 	runtimeOnly("org.postgresql:postgresql")
 	kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
 	runtimeOnly("org.postgresql:r2dbc-postgresql")
+	// https://mvnrepository.com/artifact/io.r2dbc/r2dbc-postgresql
+	implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.kafka:spring-kafka-test")

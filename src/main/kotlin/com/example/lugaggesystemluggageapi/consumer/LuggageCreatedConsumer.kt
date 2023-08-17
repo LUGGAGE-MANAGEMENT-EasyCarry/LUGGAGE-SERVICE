@@ -11,16 +11,10 @@ import org.springframework.stereotype.Component
 @Component
 class LuggageCreatedConsumer(private val customerAPI: CustomerAPI) {
 
-    val logger = LoggerFactory.getLogger(LuggageCreatedEvent::class.java)
 
     @KafkaListener(topicPattern = "luggageCreated", groupId = "luggageCreated")
-    fun receive(@Payload payload: LuggageCreatedEvent) {
-        runBlocking {
-            val customer = customerAPI.getCustomerById(
-              payload.customerId!!
-            )
-            logger.info("this luggage is belongs to this customer: ${customer.name} ")
-
-        }
+    suspend fun receive(payload: LuggageCreatedEvent) {
+        val customer = payload.customerId?.let { customerAPI.getCustomerById(it) } ?: throw RuntimeException("Customer didnt found")
+        println(customer.id)
     }
 }

@@ -1,28 +1,25 @@
 package com.example.lugaggesystemluggageapi.configuration
 
+import com.example.lugaggesystemluggageapi.configuration.properties.DatabaseProperties
 import org.flywaydb.core.Flyway
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.core.env.Environment
 
 
 @Configuration
-class FlywayConfiguration(
-private val env: Environment
-) {
+class FlywayConfiguration(private val databaseProperties: DatabaseProperties) {
 
     @Bean(initMethod = "migrate")
-
     fun flyway(): Flyway {
-        val url = "jdbc:" + env.getRequiredProperty("db.url")
-        val user = env.getRequiredProperty("db.user")
-        val password = env.getRequiredProperty("db.password")
-        val config = Flyway
-            .configure()
-            .dataSource(url, user, password)
-        return Flyway(config)
+        return Flyway(
+            with(databaseProperties) {
+                Flyway.configure().baselineOnMigrate(true)
+                    .dataSource(getDatabaseUrl(host, port, name), username, password)
+            }
+        )
     }
 
-
-
+    fun getDatabaseUrl(host: String, port: String, name: String): String {
+        return "jdbc:postgresql://$host:$port/$name"
+    }
 }

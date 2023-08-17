@@ -10,23 +10,13 @@ spring:
        key-serializer: org.apache.kafka.common.serialization.StringSerializer
        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
-  flyway:
-    baselineOnMigrate: true
 
-  jpa:
-    properties:
-      hibernate:
-        connection:
-          driver_class: org.hibernate.dialect.PostgresSQLDialect
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/easyFly
-    username: postgres
-    password: Yaman.1903
-
-db:
-  url  : postgresql://localhost:5432/easyFly
-  user : postgres
-  password : Yaman.1903
+database:
+  host: localhost
+  port: 5432
+  name: easyFly
+  username: postgres
+  password: Yaman.1903
 
 eureka:
   client:

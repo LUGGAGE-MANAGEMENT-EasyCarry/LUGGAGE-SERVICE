@@ -4,5 +4,3 @@ CREATE TYPE states as enum (
     ,'RECEIVED','PENDING'
 );
 
-ALTER TABLE luggage
-ADD COLUMN state states

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 import java.util.UUID
 
 @Service
-class LuggageService(private val luggageRepository: LuggageRepository,private val luggageCreatedEventProducer: LuggageCreatedEventProducer) {
+class LuggageService(private val luggageRepository: LuggageRepository, private val luggageCreatedEventProducer: LuggageCreatedEventProducer) {
 
     suspend fun getLuggageByCustomerIdAndLuggageIdWithState(customerId: UUID, luggageId: UUID): Luggage {
         return luggageRepository.findLuggageByLuggageIdAndCustomerId(customerId, luggageId)
@@ -27,7 +27,8 @@ class LuggageService(private val luggageRepository: LuggageRepository,private va
     }
 
     suspend fun createLuggage(luggage: Luggage): Luggage {
-        luggageCreatedEventProducer.send(LuggageCreatedEvent(luggage.luggageId,null))
+        val luggageCreated = LuggageCreatedEvent(luggageId = luggage.luggageId, customerId = luggage.customerId)
+        luggageCreatedEventProducer.send(luggageCreated)
         return luggageRepository.save(luggage)
     }
 
