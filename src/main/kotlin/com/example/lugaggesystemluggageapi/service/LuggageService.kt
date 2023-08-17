@@ -3,7 +3,6 @@ package com.example.lugaggesystemluggageapi.service
 import com.example.lugaggesystemluggageapi.domain.model.Luggage
 import com.example.lugaggesystemluggageapi.domain.dto.request.LuggageRequest
 import com.example.lugaggesystemluggageapi.domain.dto.request.response.LuggageResponse
-import com.example.lugaggesystemluggageapi.domain.enums.State
 import com.example.lugaggesystemluggageapi.domain.event.LuggageCreatedEvent
 import com.example.lugaggesystemluggageapi.domain.mapper.LuggageResponseMapper
 import com.example.lugaggesystemluggageapi.producer.LuggageCreatedEventProducer
@@ -42,7 +41,7 @@ class LuggageService(private val luggageRepository: LuggageRepository, private v
         }
     }
 
-    suspend fun updateLuggageForStateInfo(id: UUID, stateInfo: State): LuggageResponse {
+    suspend fun updateLuggageForStateInfo(id: UUID, stateInfo: String): LuggageResponse {
         val luggage = luggageRepository.findById(id)
         val converter = Mappers.getMapper(LuggageResponseMapper::class.java)
         if (luggage != null) {

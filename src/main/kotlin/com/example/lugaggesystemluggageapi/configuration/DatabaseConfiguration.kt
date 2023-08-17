@@ -10,6 +10,7 @@ import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 import reactor.core.publisher.Mono
 import io.r2dbc.postgresql.PostgresqlConnectionConfiguration
 import io.r2dbc.postgresql.PostgresqlConnectionFactory
+
 @Configuration
 @EnableR2dbcRepositories
 @EnableR2dbcAuditing
@@ -18,7 +19,7 @@ class DatabaseConfiguration(private val databaseProperties: DatabaseProperties) 
     override fun connectionFactory(): PostgresqlConnectionFactory {
         return PostgresqlConnectionFactory(with(databaseProperties) {
             PostgresqlConnectionConfiguration.builder().host(host).port(port.toInt()).database(name).username(username).password(password)
-                .build()
+                    .build()
         })
     }
 

@@ -10,6 +10,6 @@ import java.util.UUID
 interface LuggageRepository :CoroutineCrudRepository<Luggage,UUID>{
 
 
-   suspend fun findLuggageByLuggageIdAndCustomerId(customerId: UUID, luggageId:UUID):Luggage
+    fun findLuggageByLuggageIdAndCustomerId(customerId: UUID, luggageId:UUID):Luggage
 
 }

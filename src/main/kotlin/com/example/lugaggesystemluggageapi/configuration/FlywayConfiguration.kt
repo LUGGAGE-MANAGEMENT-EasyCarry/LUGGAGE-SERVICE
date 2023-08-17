@@ -19,7 +19,9 @@ class FlywayConfiguration(private val databaseProperties: DatabaseProperties) {
         )
     }
 
+
     fun getDatabaseUrl(host: String, port: String, name: String): String {
         return "jdbc:postgresql://$host:$port/$name"
     }
 }
+

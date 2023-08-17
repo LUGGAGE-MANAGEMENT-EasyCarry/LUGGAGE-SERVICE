@@ -6,7 +6,6 @@ import com.example.lugaggesystemluggageapi.client.dto.response.notification.Noti
 import com.example.lugaggesystemluggageapi.client.dto.response.notification.dto.NotificationRequest
 import com.example.lugaggesystemluggageapi.domain.dto.request.LuggageRequest
 import com.example.lugaggesystemluggageapi.domain.dto.request.response.LuggageResponse
-import com.example.lugaggesystemluggageapi.domain.enums.State
 import com.example.lugaggesystemluggageapi.domain.mapper.LuggageResponseMapper
 import com.example.lugaggesystemluggageapi.service.LuggageService
 import org.mapstruct.factory.Mappers
@@ -53,7 +52,7 @@ class LuggageController(private val luggageService: LuggageService, private val 
     }
 
     @PatchMapping("/edit/status/{id}")
-    suspend fun updateLuggageForStateInfo(@PathVariable id: UUID, @RequestParam state: State): LuggageResponse {
+    suspend fun updateLuggageForStateInfo(@PathVariable id: UUID, @RequestParam state: String): LuggageResponse {
        return luggageService.updateLuggageForStateInfo(id, state)
     }
 
