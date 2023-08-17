@@ -46,6 +46,7 @@ class LuggageService(private val luggageRepository: LuggageRepository, private v
         val converter = Mappers.getMapper(LuggageResponseMapper::class.java)
         if (luggage != null) {
             luggage.state = stateInfo
+            luggageRepository.save(luggage)
             return converter.convertToDto(luggage)
         }
         throw RuntimeException("Luggage is not found!")

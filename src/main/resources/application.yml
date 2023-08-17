@@ -16,7 +16,7 @@ database:
   port: 5432
   name: easyFly
   username: postgres
-  password: Yaman.1903
+  password: 1212anan
 
 eureka:
   client:
