@@ -12,4 +12,8 @@ interface LuggageRepository :CoroutineCrudRepository<Luggage,UUID>{
 
    suspend fun findLuggageByLuggageIdAndCustomerId(customerId: UUID, luggageId:UUID):Luggage
 
+   suspend fun findLuggageByCheckInId(checkInId:UUID):Luggage
+
+
+
 }

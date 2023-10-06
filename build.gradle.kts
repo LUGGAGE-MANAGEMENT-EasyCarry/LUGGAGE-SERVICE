@@ -41,6 +41,9 @@ dependencies {
 	testImplementation("org.springframework.kafka:spring-kafka-test")
 	implementation("org.mapstruct:mapstruct:1.5.3.Final")// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.4")
+	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
+	implementation("org.springframework.data:spring-data-jpa:2.7.6")
+
 }
 
 tasks.withType<KotlinCompile> {

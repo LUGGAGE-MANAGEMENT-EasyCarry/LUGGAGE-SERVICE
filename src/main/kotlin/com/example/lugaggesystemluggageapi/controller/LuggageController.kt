@@ -4,9 +4,11 @@ package com.example.lugaggesystemluggageapi.controller
 import com.example.lugaggesystemluggageapi.client.dto.response.customer.CustomerAPI
 import com.example.lugaggesystemluggageapi.client.dto.response.notification.NotificationAPI
 import com.example.lugaggesystemluggageapi.client.dto.response.notification.dto.NotificationRequest
+import com.example.lugaggesystemluggageapi.domain.CustomerAggregate
 import com.example.lugaggesystemluggageapi.domain.dto.request.LuggageRequest
 import com.example.lugaggesystemluggageapi.domain.dto.request.response.LuggageResponse
 import com.example.lugaggesystemluggageapi.domain.mapper.LuggageResponseMapper
+import com.example.lugaggesystemluggageapi.domain.model.Luggage
 import com.example.lugaggesystemluggageapi.service.LuggageService
 import org.mapstruct.factory.Mappers
 import org.springframework.web.bind.annotation.GetMapping
@@ -45,6 +47,7 @@ class LuggageController(private val luggageService: LuggageService, private val 
         val luggage = luggageService.createLuggage(converter.convertDtoToEntity(luggageRequest))
         return converter.convertToDto(luggage)
     }
+
     @PatchMapping("/{id}")
     suspend fun update(@PathVariable id: UUID, @RequestBody luggageRequest: LuggageRequest): LuggageResponse {
         val converter = Mappers.getMapper(LuggageResponseMapper::class.java)
@@ -53,7 +56,19 @@ class LuggageController(private val luggageService: LuggageService, private val 
 
     @PatchMapping("/edit/status/{id}")
     suspend fun updateLuggageForStateInfo(@PathVariable id: UUID, @RequestParam state: String): LuggageResponse {
-       return luggageService.updateLuggageForStateInfo(id, state)
+        return luggageService.updateLuggageForStateInfo(id, state)
     }
+
+    @GetMapping("/luggages/checkInId")
+    suspend fun getLuggageByCheckInId(@RequestParam checkInId: UUID): LuggageResponse {
+        return luggageService.findCheckInId(checkInId)
+    }
+
+
+    @GetMapping("/luggages/userinfos")
+    suspend fun findUsersForCheckedIntoFlight(@RequestParam checkInId: UUID): CustomerAggregate {
+        return luggageService.findUsersForCheckedIntoFlight(checkInId)
+    }
+
 
 }

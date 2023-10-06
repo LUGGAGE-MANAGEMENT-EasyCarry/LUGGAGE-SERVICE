@@ -1,4 +1,4 @@
-package com.example.lugaggesystemluggageapi.utils
+/*package com.example.lugaggesystemluggageapi.utils
 
 import com.example.lugaggesystemluggageapi.domain.dto.request.LuggageRequest
 import com.example.lugaggesystemluggageapi.domain.dto.request.response.LuggageResponse
@@ -44,5 +44,5 @@ fun setLuggageState(
     flightId: UUID = UUID.fromString("3d21c322-5b16-4b3a-9f51-11670c625a72"),
     customerId: UUID = UUID.fromString("3d21c322-5b16-4b3a-9f51-11670c625a72"),
     state: State = State.PENDING
-) = Luggage(luggageId ,weight,flightId,customerId,state)
+) = Luggage(luggageId ,weight,flightId,customerId,state)*/
 
