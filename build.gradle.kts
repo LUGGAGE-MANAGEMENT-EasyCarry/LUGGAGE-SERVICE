@@ -43,6 +43,7 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.4")
 	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
 	implementation("org.springframework.data:spring-data-jpa:2.7.6")
+	implementation("org.springframework.data:spring-data-jpa:3.2.2")
 
 }
 

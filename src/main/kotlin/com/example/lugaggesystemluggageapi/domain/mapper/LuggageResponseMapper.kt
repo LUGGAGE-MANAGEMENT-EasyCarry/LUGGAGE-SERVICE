@@ -9,8 +9,8 @@ import reactor.core.publisher.Mono
 @Mapper
 interface LuggageResponseMapper {
 
-     fun convertToDto(luggage: Luggage): LuggageResponse
-     fun  convertLuggageListToLuggageResponseList(luggages : List<Luggage>): List<LuggageResponse>
-     fun convertDtoToEntity(luggageRequest: LuggageRequest):Luggage
+    fun convertToDto(luggage: Luggage): LuggageResponse
+    fun convertLuggageListToLuggageResponseList(luggages: List<Luggage>): List<LuggageResponse>
+    fun convertDtoToEntity(luggageRequest: LuggageRequest): Luggage
 
 }

@@ -7,7 +7,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-@EnableDiscoveryClient
 class BaggageSystemBaggageApiApplication
 
 fun main(args: Array<String>) {
