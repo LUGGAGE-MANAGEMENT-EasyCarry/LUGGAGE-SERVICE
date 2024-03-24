@@ -1,21 +1,13 @@
 spring:
   application:
     name: "luggage-service"
-  kafka:
-    bootstrap-servers: http://localhost:29092
-    consumer:
-       auto-offset-reset: earliest
-       group-id: kafka-consumer
-    producer:
-       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 
 database:
   host: localhost
-  port: 5432
+  port: 54322
   name: easyFly
-  username: postgres
+  username: luggage_user
   password: Yaman.1903
 
 eureka:

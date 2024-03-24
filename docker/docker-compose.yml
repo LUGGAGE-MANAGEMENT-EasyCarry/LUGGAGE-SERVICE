@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15.4
+    container_name: luggage-postgres
+    ports:
+      - "54322:5432"
+    volumes:
+      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: luggage_user
+      POSTGRES_PASSWORD: Yaman.1903
+      POSTGRES_DB: easyFly
+
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "luggage_test", "-U", "luggage_user" ]
+      timeout: 5s
+      interval: 2s
+      retries: 3
+
