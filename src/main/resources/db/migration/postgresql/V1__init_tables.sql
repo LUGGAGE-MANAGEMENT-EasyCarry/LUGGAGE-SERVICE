@@ -10,6 +10,7 @@ CREATE TABLE  luggage(
                          checkin_id uuid,
                          PRIMARY KEY (luggage_id)
 );
+
 CREATE TABLE  checkin(
                     id uuid NOT NULL DEFAULT uuid_generate_v4(),
                     isCheckedIn BOOLEAN NOT NULL ,

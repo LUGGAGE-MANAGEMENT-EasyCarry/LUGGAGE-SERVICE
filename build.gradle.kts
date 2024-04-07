@@ -10,13 +10,19 @@ plugins {
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
-
+val mapStructVersion = "1.5.5.Final"
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
 	mavenCentral()
+}
+
+kapt {
+	arguments {
+		arg("mapstruct.defaultComponentModel", "spring")
+	}
 }
 
 dependencies {
@@ -32,14 +38,14 @@ dependencies {
 	implementation("org.springframework:spring-jdbc")
 	implementation("org.springframework.kafka:spring-kafka")
 	runtimeOnly("org.postgresql:postgresql")
-	kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
 	runtimeOnly("org.postgresql:r2dbc-postgresql")
 	// https://mvnrepository.com/artifact/io.r2dbc/r2dbc-postgresql
 	implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.kafka:spring-kafka-test")
-	implementation("org.mapstruct:mapstruct:1.5.3.Final")// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client
+	implementation("org.mapstruct:mapstruct:$mapStructVersion")
+	kapt("org.mapstruct:mapstruct-processor:$mapStructVersion")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.4")
 	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
 	implementation("org.springframework.data:spring-data-jpa:2.7.6")

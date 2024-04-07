@@ -7,10 +7,9 @@ import com.example.lugaggesystemluggageapi.client.dto.response.notification.dto.
 import com.example.lugaggesystemluggageapi.domain.CustomerAggregate
 import com.example.lugaggesystemluggageapi.domain.dto.request.LuggageRequest
 import com.example.lugaggesystemluggageapi.domain.dto.request.response.LuggageResponse
-import com.example.lugaggesystemluggageapi.domain.mapper.LuggageResponseMapper
-import com.example.lugaggesystemluggageapi.domain.model.Luggage
 import com.example.lugaggesystemluggageapi.service.LuggageService
-import org.mapstruct.factory.Mappers
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -28,30 +27,25 @@ class LuggageController(private val luggageService: LuggageService, private val 
 
     @GetMapping("/luggagebyId")
     suspend fun getLuggageByCustomerIdAndLuggageIdWithState(@RequestParam customerId: UUID, @RequestParam luggageId: UUID): LuggageResponse {
-        val customer = customerAPI.getCustomerById(customerId)
-        val converter = Mappers.getMapper(LuggageResponseMapper::class.java)
-        notificationAPI.create(NotificationRequest(LocalDate.now(), "Çok yakında ! "))
-        return converter.convertToDto(luggageService.getLuggageByCustomerIdAndLuggageIdWithState(customerId, luggageId))
 
+        notificationAPI.create(NotificationRequest(LocalDate.now(), "Çok yakında ! "))
+        return luggageService.getLuggageByCustomerIdAndLuggageIdWithState(customerId, luggageId)
     }
 
     @GetMapping
     suspend fun getLuggages(): List<LuggageResponse> {
-        val converter = Mappers.getMapper(LuggageResponseMapper::class.java)
-        return converter.convertLuggageListToLuggageResponseList(luggageService.getLuggages())
+        return luggageService.getLuggages()
     }
 
     @PostMapping
-    suspend fun createLuggage(@RequestBody luggageRequest: LuggageRequest): LuggageResponse {
-        val converter = Mappers.getMapper(LuggageResponseMapper::class.java)
-        val luggage = luggageService.createLuggage(converter.convertDtoToEntity(luggageRequest))
-        return converter.convertToDto(luggage)
+    suspend fun createLuggage(@RequestBody luggageRequest: LuggageRequest): ResponseEntity<LuggageResponse> {
+        val createdLuggage = luggageService.createLuggage(luggageRequest)
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdLuggage)
     }
 
     @PatchMapping("/{id}")
     suspend fun update(@PathVariable id: UUID, @RequestBody luggageRequest: LuggageRequest): LuggageResponse {
-        val converter = Mappers.getMapper(LuggageResponseMapper::class.java)
-        return converter.convertToDto(luggageService.updateLuggage(id, luggageRequest))
+        return luggageService.updateLuggage(id, luggageRequest)
     }
 
     @PatchMapping("/edit/status/{id}")
