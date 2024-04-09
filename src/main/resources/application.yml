@@ -1,29 +1,23 @@
 spring:
   application:
     name: "luggage-service"
-
-
-database:
-  host: localhost
-  port: 54322
-  name: easyFly
-  username: luggage_user
-  password: Yaman.1903
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8671/eureka/
-
-luggage-system:
-    notification-api:
-        baseUrl: http://localhost:8084
-        connectTimeout: 5000ms
-        readTimeout: 10000ms
-    customer-api:
-        baseUrl: http://localhost:8081
-        connectTimeout: 5000ms
-        readTimeout: 10000ms
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        default_schema: luggages
+  datasource:
+    username: ${DATASOURCE_USERNAME:luggage_user}
+    password: ${DATASOURCE_PASSWORD:Yaman.1903}
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:54322/easyFly}
+  flyway:
+    enabled: true
+    validate-on-migrate: true
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:54322/easyFly}
+    default-schema: luggages
+    user: ${DATASOURCE_USERNAME:luggage_user}
+    password: ${DATASOURCE_PASSWORD:Yaman.1903}
 
 
 server:

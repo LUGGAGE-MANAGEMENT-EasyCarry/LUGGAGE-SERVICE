@@ -9,8 +9,8 @@ import java.util.UUID
 @Service
 class CheckInService(private val checkInRepository: CheckInRepository) {
 
-    suspend fun getById(id: UUID): CheckIn? {
-        return checkInRepository.findById(id)
+     fun getById(id: UUID): CheckIn? {
+        return checkInRepository.findById(id).orElseThrow()
     }
 
     fun create(checkInRequest: CheckInRequest): CheckIn {
